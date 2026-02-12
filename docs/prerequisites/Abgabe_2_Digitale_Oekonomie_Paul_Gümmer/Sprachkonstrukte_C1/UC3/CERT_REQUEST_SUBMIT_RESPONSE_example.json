@@ -1,0 +1,20 @@
+{
+  "$schema": "./CERT_REQUEST_SUBMIT_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "CERT_REQUEST_SUBMIT_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250213-3102",
+    "correlationId": "msg-20250213-3101",
+    "timestamp": "2025-02-13T10:00:02Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "FLEET_SYSTEM"
+  },
+  "data": {
+    "batchId": "batch-9001",
+    "status": "ACCEPTED",
+    "acceptedRequests": [
+      { "vehicleId": "veh-10001", "requestYear": 2025 }
+    ],
+    "rejectedRequests": []
+  }
+}

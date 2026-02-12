@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "messageType": "TRADE_EXECUTED_EVENT",
+    "version": "1.0",
+    "messageId": "msg-20250211-0200",
+    "timestamp": "2025-02-11T12:00:00Z",
+    "sourceSystem": "THG_EXCHANGE_CORE",
+    "targetSystem": "COMPANY_ERP"
+  },
+  "data": {
+    "tradeId": "trade-2025-00001",
+    "certificateId": "cert-5001",
+    "sellerUserId": "user-123",
+    "buyerCompanyId": "comp-42",
+    "bidId": "bid-5001",
+    "tradeDate": "2025-02-11T11:59:30Z",
+    "pricePerUnitEur": 175.00,
+    "totalPriceEur": 175.00,
+    "feeEur": 5.00,
+    "currency": "EUR",
+    "blockchainHash": "0xabc123def456"
+  }
+}

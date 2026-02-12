@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TradeExecutedEvent",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": { "type": "string", "const": "TRADE_EXECUTED_EVENT" },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "tradeId": { "type": "string" },
+        "certificateId": { "type": "string" },
+        "sellerUserId": { "type": "string" },
+        "buyerCompanyId": { "type": "string" },
+        "bidId": { "type": "string" },
+        "tradeDate": { "type": "string", "format": "date-time" },
+        "pricePerUnitEur": { "type": "number" },
+        "totalPriceEur": { "type": "number" },
+        "feeEur": { "type": "number" },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "blockchainHash": { "type": "string" }
+      },
+      "required": [
+        "tradeId",
+        "certificateId",
+        "sellerUserId",
+        "buyerCompanyId",
+        "tradeDate",
+        "pricePerUnitEur",
+        "totalPriceEur",
+        "feeEur",
+        "currency",
+        "blockchainHash"
+      ]
+    }
+  },
+  "required": ["meta", "data"]
+}

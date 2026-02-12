@@ -1,0 +1,22 @@
+
+{
+    "$schema": "./UC5_BID_CREATE_REQUEST_schema.json",
+  "meta": {
+    "messageType": "BID_CREATE_REQUEST",
+    "version": "1.0",
+    "messageId": "msg-20250210-1001",
+    "timestamp": "2025-02-10T09:00:00Z",
+    "sourceSystem": "COMPANY_ERP",
+    "targetSystem": "THG_EXCHANGE_API"
+  },
+  "data": {
+    "bidId": "bid-5001",
+    "companyId": "comp-42",
+    "quantityCertificates": 100,
+    "maxPricePerUnitEur": 180.25,
+    "validUntil": "2025-02-11T23:59:59Z",
+    "currency": "EUR"
+  }
+}
+
+

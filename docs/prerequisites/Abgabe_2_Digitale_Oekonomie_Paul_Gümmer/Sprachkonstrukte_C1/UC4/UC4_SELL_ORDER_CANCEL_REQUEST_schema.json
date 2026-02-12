@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SellOrderCancelRequest",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": { "type": "string", "const": "SELL_ORDER_CANCEL_REQUEST" },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "sellOrderId": { "type": "string" },
+        "sellerType": { "type": "string", "enum": ["USER", "COMPANY_PROVIDER"] },
+        "sellerId": { "type": "string" },
+        "reason": { "type": "string" }
+      },
+      "required": ["sellOrderId", "sellerType", "sellerId"]
+    }
+  },
+  "required": ["meta", "data"]
+}

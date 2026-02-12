@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TradeEventAck",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": { "type": "string", "const": "TRADE_EVENT_ACK" },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "correlationId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "correlationId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "tradeId": { "type": "string" },
+        "status": { "type": "string", "enum": ["RECEIVED", "FAILED"] },
+        "reason": { "type": "string" }
+      },
+      "required": ["tradeId", "status"]
+    }
+  },
+  "required": ["meta", "data"]
+}

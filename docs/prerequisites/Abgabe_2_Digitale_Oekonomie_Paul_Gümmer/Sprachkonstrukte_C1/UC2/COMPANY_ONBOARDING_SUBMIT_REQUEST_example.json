@@ -1,0 +1,29 @@
+{
+  "$schema": "./COMPANY_ONBOARDING_SUBMIT_REQUEST_schema.json",
+  "meta": {
+    "messageType": "COMPANY_ONBOARDING_SUBMIT_REQUEST",
+    "version": "1.0",
+    "messageId": "msg-20250213-2301",
+    "timestamp": "2025-02-13T08:00:00Z",
+    "sourceSystem": "COMPANY_ERP",
+    "targetSystem": "THG_EXCHANGE_API"
+  },
+  "data": {
+    "onboardingId": "onb-1001",
+    "company": {
+      "companyId": "comp-88",
+      "name": "Example Mobility GmbH",
+      "vatNumber": "ATU12345678",
+      "address": "Main Street 1, 1010 Vienna, AT",
+      "contactEmail": "b2b-contact@example.com"
+    },
+    "documents": [
+      {
+        "documentType": "REGISTER_EXTRACT",
+        "fileName": "register_extract.pdf",
+        "contentType": "application/pdf",
+        "contentBase64": "BASE64"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "./UC5_BID_UPDATE_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "BID_UPDATE_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250210-1102",
+    "correlationId": "msg-20250210-1101",
+    "timestamp": "2025-02-10T10:00:01Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "COMPANY_ERP"
+  },
+  "data": {
+    "bidId": "bid-7001",
+    "status": "UPDATED",
+    "executionType": "PLACED",
+    "executedQuantity": 0,
+    "remainingQuantity": 40
+  }
+}

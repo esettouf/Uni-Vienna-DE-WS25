@@ -1,0 +1,17 @@
+{
+  "$schema": "./COMPANY_ONBOARDING_SUBMIT_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "COMPANY_ONBOARDING_SUBMIT_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250213-2202",
+    "correlationId": "msg-20250213-2201",
+    "timestamp": "2025-02-13T08:00:02Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "COMPANY_ERP"
+  },
+  "data": {
+    "onboardingId": "onb-1001",
+    "companyId": "comp-88",
+    "status": "ACCEPTED"
+  }
+}

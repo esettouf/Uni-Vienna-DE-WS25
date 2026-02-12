@@ -1,0 +1,16 @@
+{
+  "$schema": "./ERROR_schema.json",
+  "meta": {
+    "messageType": "ERROR",
+    "version": "1.0",
+    "messageId": "msg-20250213-9001",
+    "correlationId": "msg-20250213-2301",
+    "timestamp": "2025-02-13T08:00:01Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "COMPANY_ERP"
+  },
+  "data": {
+    "errorCode": "AUTH_FAILED",
+    "errorMessage": "API key is missing or invalid"
+  }
+}

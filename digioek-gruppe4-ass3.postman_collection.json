@@ -1,0 +1,1214 @@
+{
+	"info": {
+		"_postman_id": "cae4468f-1bdd-4e02-b75f-65afde5778b1",
+		"name": "digioek-gruppe4-ass3 Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20512274",
+		"_collection_link": "https://martian-equinox-418953.postman.co/workspace/My-Workspace~faa73264-8ecc-4ad2-879c-27bb8b448917/collection/20512274-cae4468f-1bdd-4e02-b75f-65afde5778b1?action=share&source=collection_link&creator=20512274"
+	},
+	"item": [
+		{
+			"name": "B2B - UC2 Register Business",
+			"item": [
+				{
+					"name": "Register Business Seller",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation RegisterBusiness(\r\n  $email: String!,\r\n  $password: String!,\r\n  $passwordRepeat: String!,\r\n  $name: String!,\r\n  $vatNumber: String!,\r\n  $address: String!\r\n) {\r\n  registerBusiness(\r\n    email: $email,\r\n    password: $password,\r\n    passwordRepeat: $passwordRepeat,\r\n    name: $name,\r\n    vatNumber: $vatNumber,\r\n    address: $address\r\n  ) {\r\n    ok\r\n    message\r\n    userId\r\n  }\r\n}",
+								"variables": "{\r\n  \"email\": \"bizness@example.com\",\r\n  \"password\": \"Admin123!\",\r\n  \"passwordRepeat\": \"Admin123!\",\r\n  \"name\": \"bizness GmbH\",\r\n  \"vatNumber\": \"BIZ123456789\",\r\n  \"address\": \"Alser Strasse 1, 1090 Vienna\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login & Get Seller Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json().data.authLogin;\r",
+									"if (data.ok) {\r",
+									"  pm.collectionVariables.set(\"sellerToken\", data.accessToken);\r",
+									"  pm.collectionVariables.set(\"sellerId\", data.userId);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation Login($email:String!, $password:String!) {\r\n    authLogin(email:$email, password:$password) {\r\n        ok\r\n        message\r\n        accessToken\r\n        userId\r\n        role\r\n    }\r\n}",
+								"variables": "{\r\n    \"email\": \"bizness@example.com\",\r\n    \"password\": \"Admin123!\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Seller User Infos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{sellerToken}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query User {\r\n    user(userId: \"{{sellerId}}\") {\r\n        userId\r\n        name\r\n        email\r\n        vatNumber\r\n        address\r\n        kyc\r\n        role\r\n        verificationStatus\r\n        walletBalance\r\n        createdAt\r\n    }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login & Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json().data.authLogin;\r",
+									"if (data.ok) {\r",
+									"  pm.collectionVariables.set(\"adminToken\", data.accessToken);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation Login($email:String!, $password:String!) {\r\n    authLogin(email:$email, password:$password) {\r\n        ok\r\n        message\r\n        accessToken\r\n        userId\r\n        role\r\n    }\r\n}",
+								"variables": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"Admin123!\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Platform Verifies Seller Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateVerificationStatus {\r\n    updateVerificationStatus(status: \"VERIFIED\", userId: \"{{sellerId}}\") {\r\n        ok\r\n        message\r\n    }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm User Verification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{sellerToken}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query User {\r\n    user(userId: \"{{sellerId}}\") {\r\n        userId\r\n        name\r\n        vatNumber\r\n        kyc\r\n        verificationStatus\r\n    }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "B2B - UC3",
+			"item": [
+				{
+					"name": "Create Batch Certificate Requests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const items = pm.response.json().data.b2bSubmitCertBatch.items;\r",
+									"pm.collectionVariables.set(\"requestId\", items[0].requestId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{sellerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation($input:B2BCertBatchSubmitInput!){ b2bSubmitCertBatch(input:$input){ ok message batchId items { vehicleVin licensePlate ok message requestId } } }\",\r\n  \"variables\": {\r\n    \"input\": {\r\n      \"meta\": {\r\n        \"messageId\": \"MC01\",\r\n        \"timestamp\": \"2026-01-15T12:00:00Z\",\r\n        \"sourceSystem\": \"PartnerSystemA\",\r\n        \"schemaVersion\": \"1.0\"\r\n      },\r\n      \"data\": {\r\n        \"requestYear\": 2026,\r\n        \"vehicles\": [\r\n          {\r\n            \"vehicleType\": \"BEV\",\r\n            \"registrationYear\": 2020,\r\n            \"licensePlate\": \"B-AB-123\",\r\n            \"vin\": \"VIN12345\",\r\n            \"evidenceRef\": \"s3://bucket/doc1.pdf\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login & Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json().data.authLogin;\r",
+									"if (data.ok) {\r",
+									"  pm.collectionVariables.set(\"adminToken\", data.accessToken);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bear {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation Login($email:String!, $password:String!) {\r\n    authLogin(email:$email, password:$password) {\r\n        ok\r\n        message\r\n        accessToken\r\n        userId\r\n        role\r\n    }\r\n}",
+								"variables": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"Admin123!\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}?",
+							"host": [
+								"{{baseURL}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm certificates",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation Decide($requestId: String!, $decision: String!) { adminDecideCertRequestEmitEvent(requestId: $requestId, decision: $decision) { ok message eventId } }\",\r\n  \"variables\": {\r\n    \"requestId\": \"{{requestId}}\",\r\n    \"decision\": \"CONFIRMED\"\r\n  }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pending for confirmation 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const evs = pm.response.json().data.b2bPendingCertDecisionEvents;\r",
+									"if (evs && evs.length > 0) pm.collectionVariables.set(\"eventId\", evs[0].eventId);\r",
+									"if (evs && evs.length > 0) pm.collectionVariables.set(\"certificateId1\", evs[0].certificateId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { b2bPendingCertDecisionEvents { eventId eventType correlationId requestId decision certificateId createdAt status } }\",\r\n  \"variables\": {}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACK 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation($eventId:String!){ b2bAckCertDecisionEvent(eventId:$eventId){ ok message } }\",\r\n  \"variables\": {\r\n    \"eventId\": \"{{eventId}}\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Batch Certificate Requests 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const items = pm.response.json().data.b2bSubmitCertBatch.items;\r",
+									"pm.collectionVariables.set(\"requestId\", items[0].requestId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation($input:B2BCertBatchSubmitInput!){ b2bSubmitCertBatch(input:$input){ ok message batchId items { vehicleVin licensePlate ok message requestId } } }\",\r\n  \"variables\": {\r\n    \"input\": {\r\n      \"meta\": {\r\n        \"messageId\": \"MC02\",\r\n        \"timestamp\": \"2026-01-15T12:00:00Z\",\r\n        \"sourceSystem\": \"PartnerSystemA\",\r\n        \"schemaVersion\": \"1.0\"\r\n      },\r\n      \"data\": {\r\n        \"requestYear\": 2026,\r\n        \"vehicles\": [\r\n          {\r\n            \"vehicleType\": \"OTHER\",\r\n            \"registrationYear\": 2019,\r\n            \"licensePlate\": \"B-CD-456\",\r\n            \"vin\": \"VIN99999\",\r\n            \"evidenceRef\": \"s3://bucket/doc2.pdf\"\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm certificates 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation Decide($requestId: String!, $decision: String!) { adminDecideCertRequestEmitEvent(requestId: $requestId, decision: $decision) { ok message eventId } }\",\r\n  \"variables\": {\r\n    \"requestId\": \"{{requestId}}\",\r\n    \"decision\": \"CONFIRMED\"\r\n  }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pending for confirmation 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const evs = pm.response.json().data.b2bPendingCertDecisionEvents;\r",
+									"if (evs && evs.length > 0) pm.collectionVariables.set(\"eventId\", evs[0].eventId);\r",
+									"if (evs && evs.length > 0) pm.collectionVariables.set(\"certificateId2\", evs[0].certificateId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{sellerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { b2bPendingCertDecisionEvents { eventId eventType correlationId requestId decision certificateId createdAt status } }\",\r\n  \"variables\": {}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACK 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{sellerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation($eventId:String!){ b2bAckCertDecisionEvent(eventId:$eventId){ ok message } }\",\r\n  \"variables\": {\r\n    \"eventId\": \"{{eventId}}\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "B2B - UC4 &UC5 Sell and Buy Orders",
+			"item": [
+				{
+					"name": "Create Sell Order 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json().data.createSellOrder;\r",
+									"if (data.ok) {\r",
+									"  pm.collectionVariables.set(\"sellOrderId1\", data.sellOrderId);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{sellerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreateSellOrder {\r\n    createSellOrder(\r\n        certificateId: \"{{certificateId1}}\"\r\n        validUntil: \"2026-02-10\"\r\n        minPrice: \"{{certificateMinPrice}}\"\r\n    ) {\r\n        ok\r\n        message\r\n        sellOrderId\r\n    }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Business Buyer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation RegisterBusiness(\r\n  $email: String!,\r\n  $password: String!,\r\n  $passwordRepeat: String!,\r\n  $name: String!,\r\n  $vatNumber: String!,\r\n  $address: String!\r\n) {\r\n  registerBusiness(\r\n    email: $email,\r\n    password: $password,\r\n    passwordRepeat: $passwordRepeat,\r\n    name: $name,\r\n    vatNumber: $vatNumber,\r\n    address: $address\r\n  ) {\r\n    ok\r\n    message\r\n    userId\r\n  }\r\n}",
+								"variables": "{\r\n  \"email\": \"RWE@example.com\",\r\n  \"password\": \"Admin123!\",\r\n  \"passwordRepeat\": \"Admin123!\",\r\n  \"name\": \"RWE GmbH\",\r\n  \"vatNumber\": \"BIZ123459738\",\r\n  \"address\": \"Hauptrasse 1, 1010 Vienna\"\r\n}"
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Buyer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json().data.authLogin;\r",
+									"if (data.ok) {\r",
+									"  pm.collectionVariables.set(\"buyerToken\", data.accessToken);\r",
+									"    pm.collectionVariables.set(\"buyerId\", data.userId);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation Login($email:String!, $password:String!) { authLogin(email:$email, password:$password) { ok message accessToken userId role } }\",\r\n  \"variables\": {\r\n    \"email\": \"RWE@example.com\",\r\n    \"password\": \"Admin123!\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Platform Verifies Buyer Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{adminToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateVerificationStatus {\r\n    updateVerificationStatus(status: \"VERIFIED\", userId: \"{{buyerId}}\") {\r\n        ok\r\n        message\r\n    }\r\n}\r\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Marktübersicht aufrufen Buyer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// assume `resp` is the parsed JSON response, e.g. pm.response.json()\r",
+									"const orders = (pm.response.json().data.marketSellOrders) || [];\r",
+									"const values = orders.map(o => Number(o.minPrice)).filter(n => !Number.isNaN(n));\r",
+									"const minPrice = values.length ? values.reduce((a,b) => a + b, 0) / values.length : 0;\r",
+									"pm.collectionVariables.set(\"certificateBuyPrice\", minPrice + (minPrice * 0.5));"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{buyerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { marketSellOrders { sellOrderId certificateId minPrice expiresAt status } }\",\r\n  \"variables\": {}\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kaufauftrag erstellen 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{buyerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation($maxPrice:String!){ b2bCreateBid(maxPrice:$maxPrice){ ok message bidId tradeId } }\",\r\n  \"variables\": {\r\n    \"maxPrice\": \"100\"\r\n  }\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kaufauftrag erstellen 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const data = pm.response.json().data.b2bCreateBid;\r",
+									"if (data.ok) {\r",
+									"  pm.collectionVariables.set(\"buyOrder2\", data.bidId);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{buyerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation($maxPrice:String!){ b2bCreateBid(maxPrice:$maxPrice){ ok message bidId tradeId } }\",\r\n  \"variables\": {\r\n    \"maxPrice\": \"500\"\r\n  }\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Marktübersicht aufrufen Seller",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// assume `resp` is the parsed JSON response, e.g. pm.response.json()\r",
+									"const orders = (pm.response.json().data.marketSellOrders) || [];\r",
+									"const values = orders.map(o => Number(o.minPrice)).filter(n => !Number.isNaN(n));\r",
+									"const minPrice = values.length ? values.reduce((a,b) => a + b, 0) / values.length : 0;\r",
+									"pm.collectionVariables.set(\"certificateBuyPrice\", minPrice + (minPrice * 0.5));"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{sellerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"query { marketOpenBids { bidId companyId maxPrice status createdAt } }\",\r\n  \"variables\": {}\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kaufauftrag 2 stornieren",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{buyerToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": \"mutation($bidId:String!){ b2bCancelBid(bidId:$bidId){ ok message } }\",\r\n  \"variables\": {\r\n    \"bidId\": \"{{buyOrder2}}\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}",
+							"host": [
+								"{{baseURL}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "adminToken",
+			"value": ""
+		},
+		{
+			"key": "sellerId",
+			"value": ""
+		},
+		{
+			"key": "buyerToken",
+			"value": ""
+		},
+		{
+			"key": "certificateRequestId1",
+			"value": ""
+		},
+		{
+			"key": "certificateId1",
+			"value": ""
+		},
+		{
+			"key": "certificateId2",
+			"value": ""
+		},
+		{
+			"key": "certificateMinPrice",
+			"value": ""
+		},
+		{
+			"key": "certificateBuyPrice",
+			"value": ""
+		},
+		{
+			"key": "sellOrderId1",
+			"value": ""
+		},
+		{
+			"key": "batchMessageId",
+			"value": ""
+		},
+		{
+			"key": "requestId",
+			"value": ""
+		},
+		{
+			"key": "eventId",
+			"value": ""
+		},
+		{
+			"key": "businessToken",
+			"value": ""
+		},
+		{
+			"key": "certificateRequestId",
+			"value": ""
+		},
+		{
+			"key": "certificateId",
+			"value": ""
+		},
+		{
+			"key": "sellOrderId",
+			"value": ""
+		},
+		{
+			"key": "buyOrder2",
+			"value": ""
+		},
+		{
+			"key": "sellerToken",
+			"value": ""
+		},
+		{
+			"key": "certificateRequestId2",
+			"value": ""
+		},
+		{
+			"key": "batchMessageId2",
+			"value": ""
+		},
+		{
+			"key": "buyerId",
+			"value": ""
+		},
+		{
+			"key": "requestId2",
+			"value": ""
+		},
+		{
+			"key": "eventId2",
+			"value": ""
+		}
+	]
+}

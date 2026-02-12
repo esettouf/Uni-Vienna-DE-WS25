@@ -1,0 +1,21 @@
+{
+  "$schema": "./ORDER_STATUS_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "ORDER_STATUS_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250212-4002",
+    "correlationId": "msg-20250212-4001",
+    "timestamp": "2025-02-12T09:45:01Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "COMPANY_ERP"
+  },
+  "data": {
+    "orderType": "BID",
+    "orderId": "bid-6001",
+    "status": "PARTIALLY_MATCHED",
+    "executedQuantity": 60,
+    "remainingQuantity": 40,
+    "lastUpdatedAt": "2025-02-12T09:44:58Z"
+  }
+}
+

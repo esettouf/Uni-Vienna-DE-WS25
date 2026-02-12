@@ -1,0 +1,26 @@
+@startuml
+' THG Exchange - simple architecture overview
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+title THG Exchange - Architecture Overview
+
+actor "Customer/Browser" as Browser
+
+node "By Nginx, SSL-Certificates, TLS,\nhandles routing, redirects" as Nginx <<Reverse Proxy>>
+node "Built by Vite, Apollo manages GraphQL queries to Backend" as Frontend <<REACT Frontend>>
+node "Flask App, GraphQL schemas defined,\nJWT Authentication, services contain business logic" as Backend <<Backend>>
+database "MongoDB" as Mongo <<Database>>
+
+Browser -[#black]-> Nginx : Uses Webpages\nHTTPS (localhost:8080/)
+Nginx -[#black]-> Frontend : HTTP (internal)
+Nginx -[#black]-> Backend : HTTP (internal)
+Backend --> Mongo : Read &Write Collections:\nRepos: user_repo, cert_repo, trading_repo, idempotency_repo
+BusinessClient --> Nginx : Uses API\nHTTPS (localhost:8080/)/graphql
+Frontend -[#black]-> Backend : HTTP POST /graphql\n(internal port by Frontend Nginx)
+
+note right of Backend
+  Services: auth, certification, trading, payout
+end note
+
+@enduml

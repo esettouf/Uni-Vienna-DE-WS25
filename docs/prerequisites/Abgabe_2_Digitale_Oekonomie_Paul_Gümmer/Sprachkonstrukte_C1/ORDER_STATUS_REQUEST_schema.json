@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderStatusRequest",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": { "type": "string", "const": "ORDER_STATUS_REQUEST" },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "orderType": { "type": "string", "enum": ["BID", "SELL_ORDER"] },
+        "orderId": { "type": "string" },
+        "requestingPartyId": { "type": "string" }
+      },
+      "required": ["orderType", "orderId", "requestingPartyId"]
+    }
+  },
+  "required": ["meta", "data"]
+}
+

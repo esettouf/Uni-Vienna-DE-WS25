@@ -1,0 +1,16 @@
+{
+  "$schema": "./CERT_EVENT_ACK_schema.json",
+  "meta": {
+    "messageType": "CERT_EVENT_ACK",
+    "version": "1.0",
+    "messageId": "msg-20250213-3104",
+    "correlationId": "msg-20250213-3103",
+    "timestamp": "2025-02-13T11:00:01Z",
+    "sourceSystem": "FLEET_SYSTEM",
+    "targetSystem": "THG_EXCHANGE_CORE"
+  },
+  "data": {
+    "batchId": "batch-9001",
+    "status": "RECEIVED"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "./TRADE_EVENT_ACK_schema.json",
+  "meta": {
+    "messageType": "TRADE_EVENT_ACK",
+    "version": "1.0",
+    "messageId": "msg-20250212-3002",
+    "correlationId": "msg-20250212-3001",
+    "timestamp": "2025-02-12T09:30:06Z",
+    "sourceSystem": "COMPANY_ERP",
+    "targetSystem": "THG_EXCHANGE_CORE"
+  },
+  "data": {
+    "tradeId": "trade-2025-00001",
+    "status": "RECEIVED"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CompanyOnboardingSubmitResponse",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "messageType": { "type": "string", "const": "COMPANY_ONBOARDING_SUBMIT_RESPONSE" },
+        "version": { "type": "string", "const": "1.0" },
+        "messageId": { "type": "string" },
+        "correlationId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "correlationId", "timestamp", "sourceSystem", "targetSystem"]
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "onboardingId": { "type": "string" },
+        "companyId": { "type": "string" },
+        "status": { "type": "string", "enum": ["ACCEPTED", "REJECTED"] },
+        "reasonCode": { "type": "string" },
+        "reason": { "type": "string" }
+      },
+      "required": ["onboardingId", "companyId", "status"],
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "REJECTED" } } },
+          "then": { "required": ["reasonCode", "reason"] }
+        }
+      ]
+    }
+  },
+  "required": ["meta", "data"]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "./UC4_SELL_ORDER_CANCEL_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "SELL_ORDER_CANCEL_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250212-2202",
+    "correlationId": "msg-20250212-2201",
+    "timestamp": "2025-02-12T09:40:01Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "PROVIDER_PORTAL"
+  },
+  "data": {
+    "sellOrderId": "sell-9001",
+    "status": "CANCELLED"
+  }
+}

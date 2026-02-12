@@ -1,0 +1,20 @@
+{
+  "$schema": "./UC4_SELL_ORDER_UPDATE_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "SELL_ORDER_UPDATE_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250213-2102",
+    "correlationId": "msg-20250213-2101",
+    "timestamp": "2025-02-13T09:30:01Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "PROVIDER_PORTAL"
+  },
+  "data": {
+    "sellOrderId": "sell-9101",
+    "status": "UPDATED",
+    "executionType": "PARTIAL",
+    "executedQuantity": 1,
+    "remainingQuantity": 1,
+    "trades": ["trade-2025-01003"]
+  }
+}

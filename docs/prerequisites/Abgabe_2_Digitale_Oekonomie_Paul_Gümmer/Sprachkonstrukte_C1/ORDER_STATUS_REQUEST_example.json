@@ -1,0 +1,17 @@
+{
+  "$schema": "./ORDER_STATUS_REQUEST_schema.json",
+  "meta": {
+    "messageType": "ORDER_STATUS_REQUEST",
+    "version": "1.0",
+    "messageId": "msg-20250212-4001",
+    "timestamp": "2025-02-12T09:45:00Z",
+    "sourceSystem": "COMPANY_ERP",
+    "targetSystem": "THG_EXCHANGE_API"
+  },
+  "data": {
+    "orderType": "BID",
+    "orderId": "bid-6001",
+    "requestingPartyId": "comp-42"
+  }
+}
+

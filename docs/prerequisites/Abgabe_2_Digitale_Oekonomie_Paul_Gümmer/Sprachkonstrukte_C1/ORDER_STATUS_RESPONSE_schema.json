@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OrderStatusResponse",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": { "type": "string", "const": "ORDER_STATUS_RESPONSE" },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "correlationId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "correlationId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "orderType": { "type": "string", "enum": ["BID", "SELL_ORDER"] },
+        "orderId": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["OPEN", "PARTIALLY_MATCHED", "FULLY_MATCHED", "CANCELLED", "EXPIRED"]
+        },
+        "executedQuantity": { "type": "integer", "minimum": 0 },
+        "remainingQuantity": { "type": "integer", "minimum": 0 },
+        "lastUpdatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderType", "orderId", "status"]
+    }
+  },
+  "required": ["meta", "data"]
+}

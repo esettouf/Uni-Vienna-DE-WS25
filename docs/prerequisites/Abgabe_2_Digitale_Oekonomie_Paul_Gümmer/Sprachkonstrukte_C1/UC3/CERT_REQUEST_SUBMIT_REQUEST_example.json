@@ -1,0 +1,34 @@
+{
+  "$schema": "./CERT_REQUEST_SUBMIT_REQUEST_schema.json",
+  "meta": {
+    "messageType": "CERT_REQUEST_SUBMIT_REQUEST",
+    "version": "1.0",
+    "messageId": "msg-20250213-3101",
+    "timestamp": "2025-02-13T10:00:00Z",
+    "sourceSystem": "FLEET_SYSTEM",
+    "targetSystem": "THG_EXCHANGE_API"
+  },
+  "data": {
+    "batchId": "batch-9001",
+    "userId": "user-1001",
+    "requestYear": 2025,
+    "vehicles": [
+      {
+        "vehicleId": "veh-10001",
+        "licensePlate": "W-THG-123",
+        "isElectric": true,
+        "vehicleType": "BEV",
+        "registrationYear": 2022,
+        "vin": "WVWZZZ1JZXW000001",
+        "evidence": [
+          {
+            "documentType": "REGISTRATION_CERT",
+            "fileName": "veh-10001.pdf",
+            "contentType": "application/pdf",
+            "contentBase64": "BASE64"
+          }
+        ]
+      }
+    ]
+  }
+}

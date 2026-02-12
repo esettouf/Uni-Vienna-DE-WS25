@@ -1,0 +1,20 @@
+{
+    "$schema": "./UC5_BID_CREATE_RESPONSE_schema.json",
+    "meta": {
+        "messageType": "BID_CREATE_RESPONSE",
+        "version": "1.0",
+        "messageId": "msg-20250213-1002",
+        "correlationId": "msg-20250213-1001",
+        "timestamp": "2025-02-13T09:00:01Z",
+        "sourceSystem": "THG_EXCHANGE_API",
+        "targetSystem": "COMPANY_ERP"
+    },
+    "data": {
+        "bidId": "bid-7001",
+        "status": "ACCEPTED",
+        "executionType": "PARTIAL",
+        "executedQuantity": 60,
+        "remainingQuantity": 40,
+        "trades": ["trade-2025-01001"]
+    }
+}

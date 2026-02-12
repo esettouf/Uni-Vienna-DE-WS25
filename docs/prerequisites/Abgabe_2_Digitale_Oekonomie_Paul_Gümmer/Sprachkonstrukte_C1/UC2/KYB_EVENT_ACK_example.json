@@ -1,0 +1,17 @@
+{
+  "$schema": "./KYB_EVENT_ACK_schema.json",
+  "meta": {
+    "messageType": "KYB_EVENT_ACK",
+    "version": "1.0",
+    "messageId": "msg-20250213-2204",
+    "correlationId": "msg-20250213-2203",
+    "timestamp": "2025-02-13T09:00:01Z",
+    "sourceSystem": "COMPANY_ERP",
+    "targetSystem": "THG_EXCHANGE_CORE"
+  },
+  "data": {
+    "onboardingId": "onb-1001",
+    "companyId": "comp-88",
+    "status": "RECEIVED"
+  }
+}

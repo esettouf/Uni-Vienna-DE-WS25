@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SellOrderCancelResponse",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": { "type": "string", "const": "SELL_ORDER_CANCEL_RESPONSE" },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "correlationId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "correlationId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "sellOrderId": { "type": "string" },
+        "status": { "type": "string", "enum": ["CANCELLED", "REJECTED"] },
+        "reason": { "type": "string" }
+      },
+      "required": ["sellOrderId", "status"]
+    }
+  },
+  "required": ["meta", "data"]
+}

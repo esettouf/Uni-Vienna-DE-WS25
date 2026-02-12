@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SellOrderUpdateResponse",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": { "type": "string", "const": "SELL_ORDER_UPDATE_RESPONSE" },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "correlationId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "correlationId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "sellOrderId": { "type": "string" },
+        "status": { "type": "string", "enum": ["UPDATED", "REJECTED"] },
+        "executionType": { "type": "string", "enum": ["IMMEDIATE", "PARTIAL", "PLACED"] },
+        "executedQuantity": { "type": "integer", "minimum": 0 },
+        "remainingQuantity": { "type": "integer", "minimum": 0 },
+        "trades": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reason": { "type": "string" }
+      },
+      "required": ["sellOrderId", "status"]
+    }
+  },
+  "required": ["meta", "data"]
+}

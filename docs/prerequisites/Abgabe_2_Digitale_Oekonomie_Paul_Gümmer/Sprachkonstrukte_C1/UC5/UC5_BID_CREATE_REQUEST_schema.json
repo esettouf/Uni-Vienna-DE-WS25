@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BidCreateRequest",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "messageType": {
+          "type": "string",
+          "const": "BID_CREATE_REQUEST"
+        },
+        "version": { "type": "string" },
+        "messageId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "sourceSystem": { "type": "string" },
+        "targetSystem": { "type": "string" }
+      },
+      "required": ["messageType", "version", "messageId", "timestamp"]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "bidId": { "type": "string" },
+        "companyId": { "type": "string" },
+        "quantityCertificates": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "maxPricePerUnitEur": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        }
+      },
+      "required": [
+        "bidId",
+        "companyId",
+        "quantityCertificates",
+        "maxPricePerUnitEur",
+        "currency"
+      ]
+    }
+  },
+  "required": ["meta", "data"]
+}

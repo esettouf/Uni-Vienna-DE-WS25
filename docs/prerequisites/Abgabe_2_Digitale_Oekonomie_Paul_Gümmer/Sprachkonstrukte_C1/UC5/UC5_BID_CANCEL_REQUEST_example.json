@@ -1,0 +1,16 @@
+{
+  "$schema": "./UC5_BID_CANCEL_REQUEST_schema.json",
+  "meta": {
+    "messageType": "BID_CANCEL_REQUEST",
+    "version": "1.0",
+    "messageId": "msg-20250210-1201",
+    "timestamp": "2025-02-10T11:00:00Z",
+    "sourceSystem": "COMPANY_ERP",
+    "targetSystem": "THG_EXCHANGE_API"
+  },
+  "data": {
+    "bidId": "bid-5001",
+    "companyId": "comp-42",
+    "reason": "Internal policy change"
+  }
+}

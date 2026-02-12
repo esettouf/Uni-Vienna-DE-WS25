@@ -1,0 +1,20 @@
+{
+  "$schema": "./UC4_SELL_ORDER_CREATE_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "SELL_ORDER_CREATE_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250213-2002",
+    "correlationId": "msg-20250213-2001",
+    "timestamp": "2025-02-13T09:10:01Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "PROVIDER_PORTAL"
+  },
+  "data": {
+    "sellOrderId": "sell-9101",
+    "status": "ACCEPTED",
+    "executionType": "IMMEDIATE",
+    "executedQuantity": 1,
+    "remainingQuantity": 0,
+    "trades": ["trade-2025-01002"]
+  }
+}

@@ -1,0 +1,49 @@
+services:
+  backend:
+    build: .
+    expose:
+      - "5000"
+    environment:
+      FLASK_APP: thg_exchange.webapp
+      FLASK_ENV: development
+      FLASK_DEBUG: "1"
+      SECRET_KEY: ${SECRET_KEY}
+      MONGO_URI: mongodb://mongo:27017/thg_exchange_db
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_USER_ID: ${ADMIN_USER_ID}
+    volumes:
+      - .:/app
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+      target: production
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  reverseproxy:
+    build:
+      context: nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx/ssl:/etc/ssl
+      - ./thg_exchange/static:/app/thg_exchange/static:ro
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  mongo_data:

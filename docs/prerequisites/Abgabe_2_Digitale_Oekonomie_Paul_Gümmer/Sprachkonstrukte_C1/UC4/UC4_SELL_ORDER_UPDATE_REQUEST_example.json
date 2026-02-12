@@ -1,0 +1,18 @@
+{
+  "$schema": "./UC4_SELL_ORDER_UPDATE_REQUEST_schema.json",
+  "meta": {
+    "messageType": "SELL_ORDER_UPDATE_REQUEST",
+    "version": "1.0",
+    "messageId": "msg-20250212-2101",
+    "timestamp": "2025-02-12T09:30:00Z",
+    "sourceSystem": "PROVIDER_PORTAL",
+    "targetSystem": "THG_EXCHANGE_API"
+  },
+  "data": {
+    "sellOrderId": "sell-9001",
+    "sellerType": "USER",
+    "sellerId": "user-123",
+    "minPricePerUnitEur": 172.00,
+    "validUntil": "2025-02-14T23:59:59Z"
+  }
+}

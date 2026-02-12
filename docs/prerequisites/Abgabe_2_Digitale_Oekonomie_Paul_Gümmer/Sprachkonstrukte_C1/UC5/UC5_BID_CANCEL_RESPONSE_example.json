@@ -1,0 +1,17 @@
+{
+  "$schema": "./UC5_BID_CANCEL_RESPONSE_schema.json",
+  "meta": {
+    "messageType": "BID_CANCEL_RESPONSE",
+    "version": "1.0",
+    "messageId": "msg-20250210-1203",
+    "correlationId": "msg-20250210-1201",
+    "timestamp": "2025-02-10T11:00:02Z",
+    "sourceSystem": "THG_EXCHANGE_API",
+    "targetSystem": "COMPANY_ERP"
+  },
+  "data": {
+    "bidId": "bid-5001",
+    "status": "REJECTED",
+    "reason": "Bid already matched and cannot be cancelled"
+  }
+}
