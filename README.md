@@ -1,3 +1,12 @@
+# --- Remarks ---
+## Contribution
+This is a group project from the course Digital Economy at the University of Vienna. I, Enis Settouf, built it together with Paul Gümmer (git01lab.cs.univie.ac.at/paulg46), which was quite fun since we work really well together as a team.
+
+## Code
+Unfortunately, the code itself is not very well documented. I hope that the readme (only German sorry!) is sufficient to understand our intentions of this project. 
+
+
+
 # Digitale Oekonomie Projekt Assignment 3
 
 # How To Run
