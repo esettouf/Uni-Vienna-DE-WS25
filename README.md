@@ -1,9 +1,9 @@
 # --- Remarks ---
 ## Contribution
-This is a group project from the course Digital Economy at the University of Vienna. I, Enis Settouf, built it together with Paul Gümmer (git01lab.cs.univie.ac.at/paulg46), which was quite fun since we work really well together as a team.
+This is a group project from the course Digital Economy at the University of Vienna. While Paul Gümmer (git01lab.cs.univie.ac.at/paulg46) came up with the idea, designed the business case and endpoints, the two of us implemented it together. Which was quite fun since we work really well together as a team :)
 
 ## Code
-Unfortunately, the code itself is not very well documented. I hope that the readme (only German sorry!) is sufficient to understand our intentions of this project. 
+Unfortunately, the code itself is not very well documented. I hope that the readme (only German sorry!) and the self-explaining code are sufficient to understand our intentions of this project. 
 
 
 
